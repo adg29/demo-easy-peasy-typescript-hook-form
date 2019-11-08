@@ -23,12 +23,12 @@ export default function Todos() {
 
   return (
     <div>
-      <h2>Todo List</h2>
       <ul>
         {items.map((todo, idx) => (
           <li key={idx}>{todo}</li>
         ))}
       </ul>
+      <label>Description</label>
       <input
         name="descriptionRequired"
         ref={register({ required: true })}

@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import Todos from './todos';
 import Notification from './notification';
 
+import "../styles.css";
+
 class App extends Component {
   render() {
     return (
       <div>
-        <h1>Easy Peasy + Typescript</h1>
-        <p>
-          This is a demonstration of how to utilise the Typescript integration
-          of <a href="https://github.com/ctrlplusb/easy-peasy">Easy Peasy</a>.
-        </p>
+        <h1>Easy Peasy + Typescript + Hook Form <small>Todo List</small></h1>
+        
         <Todos />
         <Notification />
       </div>
