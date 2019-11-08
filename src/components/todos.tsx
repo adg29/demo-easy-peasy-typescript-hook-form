@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useStoreActions, useStoreState } from "../hooks";
 
 import useForm from "react-hook-form";
@@ -10,7 +10,7 @@ export default function Todos() {
   // Pull out actions from our store
   const add = useStoreActions(actions => actions.todos.add);
 
-  const { register, setValue, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors } = useForm({
     defaultValues: {
       descriptionRequired: ""
     }
