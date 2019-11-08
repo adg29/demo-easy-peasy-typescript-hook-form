@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useStoreActions, useStoreState } from "../hooks";
 
 import useForm from "react-hook-form";
@@ -10,15 +10,22 @@ export default function Todos() {
   // Pull out actions from our store
   const add = useStoreActions(actions => actions.todos.add);
 
-  // Track our form state
-  const [newTodo, setNewTodo] = useState("");
+  const { register, setValue, handleSubmit, errors } = useForm({
+    defaultValues: {
+      descriptionRequired: ""
+    }
+  });
 
   // Reset the form state every time the todo items changes
-  useEffect(() => setNewTodo(""), [items]);
+  useEffect(() => {
+    console.log('items change')
+    console.log(items)
+    setValue('descriptionRequired', "")
+  }, [items]);
 
-  const { register, handleSubmit, watch, errors } = useForm();
-  const onSubmit = () => {
-    add(newTodo);
+  const onSubmit = (hookFormData: any) => {
+    console.log(hookFormData)
+    add(hookFormData.descriptionRequired);
   };
 
   return (
@@ -28,17 +35,17 @@ export default function Todos() {
           <li key={idx}>{todo}</li>
         ))}
       </ul>
-      <label>Description</label>
-      <input
-        name="descriptionRequired"
-        ref={register({ required: true })}
-        type="text"
-        onChange={e => setNewTodo(e.target.value)}
-        value={newTodo}
-      />
-      {errors.descriptionRequired && <span>This field is required</span>}
-      <br/>
-      <button onClick={handleSubmit(onSubmit)}>Add</button>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label>Description</label>
+        <input
+          name="descriptionRequired"
+          ref={register({ required: true })}
+          type="text"
+        />
+        {errors.descriptionRequired && <span>This field is required</span>}
+        <br/>
+        <button type="submit">Add</button>
+      </form>
     </div>
   );
 }
