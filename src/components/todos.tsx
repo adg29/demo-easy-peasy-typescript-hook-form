@@ -16,15 +16,7 @@ export default function Todos() {
     }
   });
 
-  // // Reset the form state every time the todo items changes
-  // useEffect(() => {
-  //   console.log('items change')
-  //   console.log(items)
-  //   setValue('descriptionRequired', "")
-  // }, [items]);
-
   const onSubmit = (hookFormData: any, e: { target: { reset: () => void; }; }) => {
-    console.log(hookFormData)
     add(hookFormData.descriptionRequired);
     e.target.reset();
   };
